@@ -7,7 +7,8 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
+      unique: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -18,7 +19,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },  
     releaseDate: {
-      type : DataTypes.DATE, // string or date?
+      type : DataTypes.STRING, // string or date?
       allowNull:false
     },
     rating: {
@@ -29,6 +30,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     }
+
 
 
   },
