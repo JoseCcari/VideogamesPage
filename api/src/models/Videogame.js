@@ -19,24 +19,33 @@ module.exports = (sequelize) => {
       allowNull: false
     },  
     releaseDate: {
-      type : DataTypes.STRING, // string or date?
-      allowNull:false
+      type : DataTypes.DATEONLY, // string or date?
+      allowNull:true
     },
     rating: {
-      type : DataTypes.INTEGER,
-      allowNull: false // por verse
+      type : DataTypes.FLOAT,
+      allowNull: true // por verse
     },
     platforms: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    createInDatabase: {
+      type : DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: true
+
+    },
+    background_image: {
       type: DataTypes.STRING,
       allowNull: false
     }
 
 
-
   },
   {
-    timestamps: true,
-    createdAt: 'created',
+    timestamps: false,
+    createdAt:  false, //'created',
     updatedAt: false
   });
 };

@@ -10,8 +10,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  },{timestamps: true,
-    createdAt: 'created',
+  },{timestamps: false,
+    createdAt: false,//'created',
     updatedAt: false
 });
 };
