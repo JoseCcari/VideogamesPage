@@ -99,7 +99,7 @@ const getAllVideogames =  async () => {
     const countVideoGames = await Videogame.count();
     const getVideogamesApi = await getApiVideogames();
     if (countVideoGames > 0){
-      const videogamesDB = await VideoGame.findAll(
+      const videogamesDB = await Videogame.findAll(
         {
           attributes: ["id","name", "rating" ,"background_image"],
           include: [Genre]
@@ -144,8 +144,12 @@ const getAllVideogames =  async () => {
 }
 
 const hasQueryName = async (name) => {
+  console.log("inicio" , name)
   const nameQuery = name.toLocaleLowerCase(); 
-  encodeURI(nameQuery); 
+  console.log("medio" , nameQuery)
+  encodeURI(nameQuery);
+  console.log("final" , encodeURI(nameQuery) ) 
+
   const arrayGames = [];
   const game = await axios(`https://api.rawg.io/api/games?search=${nameQuery}&key=${API_KEY}`);
   const { results } = game.data;
