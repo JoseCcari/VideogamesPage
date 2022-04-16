@@ -5,7 +5,7 @@ const router = Router();
 const axios = require('axios').default;
 const { Videogame, Genre } = require('../db');
 
-const {getAllVideogames, hasQueryName} = require ('./utils')
+const {getAllVideogames, hasQueryName} = require ('../utils/videogames')
 
 
 router.get('/', async (req, res) => {

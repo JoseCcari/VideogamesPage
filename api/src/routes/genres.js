@@ -4,7 +4,7 @@ const { Router } = require('express');
 const router = Router();
 //const axios = require('axios').default;
 const { Genre } = require('../db');
-const {createGenresFromApi} = require('./utils')
+const {createGenresFromApi} = require('../utils/genres')
 router.get('/', async (req, res) => {
     try {
         const genresDB = await Genre.findAll();

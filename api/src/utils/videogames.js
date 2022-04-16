@@ -3,28 +3,6 @@ const { API_KEY } = process.env;
 const axios = require('axios').default;
 const { Genre , Videogame} = require('../db');
 
-const createGenresFromApi = async() => {
-    const genresAPI = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
-    const genresResult = genresAPI.data.results; 
-
-
-    genresResult.forEach(async g => {
-        await Genre.findOrCreate({
-            where: {
-                id: g.id,
-                name: g.name
-            }
-        })
-    })
-    const genresREADY = genresResult.map(game => {
-        return{
-            id: game.id,
-            name: game.name
-        }
-    });
-    return genresREADY
-}
-
 const getApiVideogames = async () => {
     let totalVideogames = [];
     
@@ -34,64 +12,6 @@ const getApiVideogames = async () => {
         totalVideogames = totalVideogames.concat(results);
     } 
     return totalVideogames
-}
-
-const createNewVideogame = async ( name,background_image, description, releaseDate, rating, genres, platforms) => {
-    const newVideogame = await Videogame.create({
-        name,
-        background_image,
-        description,
-        platforms,
-        rating,
-        releaseDate,
-    })
-    const genre = await Genre.findAll({
-        where: { name: genres },
-    })
-    newVideogame.addGenre(genre)
-    return 'Videogame Successfully Created'
-}
-
-const searchGameDB =  async ( idVideogame) => {
-    
-        let videoGamesFromDB = await Videogame.findAll({
-            include: {
-                model: Genre,
-                attributes: ['name'],
-                through: {
-                    attributes: []
-                }
-            }
-        })
-
-        const matchVideogame = await videoGamesFromDB.
-                            filter(videog => videog.id === idVideogame);  
-       
-        return matchVideogame
-
-    
-}
-const searchGameApi =  async ( idVideogame) => {  
-    const findVideogameApi = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`);
-    if (findVideogameApi === undefined){
-        throw new Error('Game not found')
-    }
-
-    const {id, name, background_image, description, released, rating, platforms, genres} = findVideogameApi.data;
-    const resultVideoGame = [];
-    resultVideoGame.push({
-        id,
-        name,
-        background_image,
-        description,
-        released,
-        rating,
-        platforms: platforms.map((p) => ` ${p.platform.name} `),
-        genres: genres.map((g) => g.name)
-    });
-    return resultVideoGame;
-
-
 }
 
 const getAllVideogames =  async () => {
@@ -178,12 +98,26 @@ const hasQueryName = async (name) => {
 
 }
 
+/* const getVideogamesfromDbByName = async (name) => {
+  let videogamesByName = await Videogame.findAll( {
+      attributes: ["id","name","background_image","rating","createInDatabase"],
+      where: {
+          name: {
+              [Op.substring]: name
+          }
+      },
+      include: {
+          model: Genre,
+          attributes: ["name"],
+          through:{
+              attributes: []
+          }
+      }
+  });
+} */
+
 module.exports = {
-    createNewVideogame,
     getApiVideogames,
-    createGenresFromApi,
-    searchGameDB,
-    searchGameApi,
     getAllVideogames,
     hasQueryName
 }

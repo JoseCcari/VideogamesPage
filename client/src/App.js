@@ -1,10 +1,16 @@
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Videogames</h1>
-    </div>
+
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element = { <div> ruta principal</div>}/>
+        <Route path='/videogames' element = { <div> Videogames </div>}/>
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
