@@ -98,7 +98,7 @@ const hasQueryName = async (name) => {
 
 }
 
-/* const getVideogamesfromDbByName = async (name) => {
+const getVideogamesfromDbByName = async (name) => {
   let videogamesByName = await Videogame.findAll( {
       attributes: ["id","name","background_image","rating","createInDatabase"],
       where: {
@@ -114,7 +114,9 @@ const hasQueryName = async (name) => {
           }
       }
   });
-} */
+
+  return videogamesByName
+}
 
 module.exports = {
     getApiVideogames,

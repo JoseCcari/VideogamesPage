@@ -11,8 +11,8 @@ router.get('/:idVideogame', async (req, res) => {
         if (idVideogame.length > 20){
 
             let resultSearchGameDB = await searchGameDB(idVideogame);
-            resultSearchGameDB.length ?
-            res.status(200).send(gameId) :
+            return resultSearchGameDB.length ?
+            res.status(200).send(resultSearchGameDB) :
             res.status(404).send('Game not found');
         }
         let resultSearchGameApi = await searchGameApi(idVideogame);
@@ -21,7 +21,7 @@ router.get('/:idVideogame', async (req, res) => {
        
     }
     catch (error){
-        next(error);
+        res.status(404).json( {error :error.message});
     }
 
 })
