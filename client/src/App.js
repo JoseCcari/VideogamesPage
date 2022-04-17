@@ -1,4 +1,10 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import InitialPage from './pages/InitialPage'
+import Videogames from './pages/Videogames'
+import CreateVideogame from './pages/CreateVideogame'
+import Detailvideogame from './pages/Detailvideogame'
+import Notfound from './pages/Notfound'
+
 import './App.css';
 
 function App() {
@@ -6,9 +12,11 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path='/' element = { <div> ruta principal</div>}/>
-        <Route path='/videogames' element = { <div> Videogames </div>}/>
-
+        <Route path='/' element = { <InitialPage/>}/>
+        <Route path='/videogames' element = { <Videogames/>}/>
+        <Route path='/Detailvideogame' element = { <Detailvideogame/>}/>
+        <Route path='/Createvideogame' element = { <CreateVideogame/>}/>
+        <Route path='*' element={<Notfound/>}/>
       </Routes>
     </BrowserRouter>
   );
