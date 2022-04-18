@@ -5,12 +5,16 @@ const { Genre , Videogame} = require('../db');
 
 const getApiVideogames = async () => {
     let totalVideogames = [];
-    
+    //let linksPerPage = []
     for(let page = 1 ; page < 6 ; page++){
         const gamesFromPage = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`);
         let { results } = gamesFromPage.data;
         totalVideogames = totalVideogames.concat(results);
+        /* const LinksFromPage = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`;
+        linksPerPage.push(LinksFromPage) */
     } 
+    //const TotalVideogames = await Promise.all(linksPerPage.map(link => axios.get(link).data))
+    //console.log(TotalVideogames)
     return totalVideogames
 }
 
@@ -21,7 +25,7 @@ const getAllVideogames =  async () => {
     if (countVideoGames > 0){
       const videogamesDB = await Videogame.findAll(
         {
-          attributes: ["id","name", "rating" ,"background_image"],
+          attributes: ["id","name", "rating" ,"background_image","createInDatabase"],
           include: [Genre]
         }
       ) 
@@ -36,7 +40,8 @@ const getAllVideogames =  async () => {
             }
           }),
           rating: vg.rating,
-          background_image: vg.background_image
+          background_image: vg.background_image,
+          createInDatabase: vg.createInDatabase
         })
       })
 
@@ -57,6 +62,7 @@ const getAllVideogames =  async () => {
         background_image,
         genres: genresArray,
         rating,
+        createInDatabase:false
       });
     })
     return videoGames

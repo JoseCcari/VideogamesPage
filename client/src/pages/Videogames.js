@@ -1,10 +1,12 @@
 import React , {useState , useEffect} from 'react'
 import {useDispatch , useSelector} from 'react-redux'
-import {getVideogames} from '../redux/actions'
+import {getVideogames,filterByCreated} from '../redux/actions'
 import {Link} from 'react-router-dom'
 import  Button from '../modules/Button'
 import  Card from '../modules/Card'
 import Paginated from '../modules/Paginated'
+
+
 function Videogames() {
     const dispatch = useDispatch()
     const allVideogames = useSelector ((state)=> state.videogames)
@@ -13,7 +15,7 @@ function Videogames() {
     }, [])
 
     const [currentPage, setCurrentPage]= useState(1);
-    const [videogamesPerPage, setVideogamesPerPage]= useState(6);
+    const [videogamesPerPage, setVideogamesPerPage]= useState(15);
     const indexOfLastVideogame = currentPage * videogamesPerPage;
     const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
     const currentVideogames = allVideogames.slice(indexOfFirstVideogame,indexOfLastVideogame);
@@ -26,20 +28,23 @@ function Videogames() {
         event.preventDefault();
         dispatch( getVideogames());
     }
+    function handleClickCreated(event) {
+        dispatch( filterByCreated(event.target.value));
+    }
     
     return (
     <div>
         <Link to= '/CreateVideogame' > Create Videogame</Link>
         <Button nameButton="refresh" handleClick= {handleClick}/>
         {/* input de busqueda por videojuego */}
-        <select name="sorting" id="">
+        <select >
             <option value="asc">Ascendente</option>
             <option value="des">Descendente</option>
         </select>
-        <select name="getters" id="">
-            <option value="all">Todos</option>
-            <option value="created">Creados</option>
-            <option value="get">Api</option>
+        <select onChange={ (e)=> handleClickCreated(e)} >
+            <option value="All">Todos</option>
+            <option value="Created">Creados</option>
+            <option value="Api">Api</option>
         </select>
 
         <div>
