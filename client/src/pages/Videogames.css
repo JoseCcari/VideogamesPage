@@ -1,0 +1,15 @@
+.Home{
+    
+}
+.navBar{
+    width: 100vw;
+}
+.Cards{
+    margin-top: 100px;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+.Paginado {
+    display: flex;
+}

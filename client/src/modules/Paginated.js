@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Paginated.css'
 function Paginated({videogamesPerPage, allVideogames, paginated}) {
     const numberPages = [];
     const totalPage = Math.ceil(allVideogames/videogamesPerPage)
@@ -7,17 +7,18 @@ function Paginated({videogamesPerPage, allVideogames, paginated}) {
         numberPages.push(i+1)
     }
     return (
-    <nav>
-        <ul className='paginated'>
-            {
-                numberPages?.map( n => (
-                    <li className='number' key={n}>
-                        <a onClick={paginated}>{n}</a>
-                    </li>
-                ))
-            }
-        </ul>
-    </nav>
+
+            <nav className='data-pagination' >
+                <ul >
+                    {
+                        numberPages?.map( n => (
+                            <li className='number' key={n}>
+                                <a onClick={paginated}>{n}</a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </nav>
   )
 }
 

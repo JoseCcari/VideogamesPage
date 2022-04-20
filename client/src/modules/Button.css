@@ -1,29 +1,49 @@
+
 .btn {
-    background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%)
-   }
-   
-.btn {
-margin: 10px;
-padding: 15px 30px;
-text-align: center;
-text-transform: uppercase;
-transition: 0.5s;
-background-size: 200% auto;
-color: white;
-border-radius: 10px;
-display: block;
-border: 0px;
-font-weight: 700;
-box-shadow: 0px 0px 14px -7px #f09819;
+--glow-color: rgb(217, 176, 255);
+--glow-spread-color: rgba(191, 123, 255, 0.781);
+--enhanced-glow-color: rgb(231, 206, 255);
+--btn-color: rgb(100, 61, 136);
+border: .25em solid var(--glow-color);
+padding: 1em 3em;
+color: var(--glow-color);
+font-size: 15px;
+font-weight: bold;
+background-color: var(--btn-color);
+border-radius: 1em;
+outline: none;
+box-shadow: 0 0 1em .25em var(--glow-color),
+        0 0 4em 1em var(--glow-spread-color),
+        inset 0 0 .75em .25em var(--glow-color);
+text-shadow: 0 0 .5em var(--glow-color);
+position: relative;
+transition: all 0.3s;
+}
+
+.btn::after {
+pointer-events: none;
+content: "";
+position: absolute;
+top: 120%;
+left: 0;
+height: 100%;
+width: 100%;
+background-color: var(--glow-spread-color);
+filter: blur(2em);
+opacity: .7;
+transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
 }
 
 .btn:hover {
-background-position: right center;
-/* change the direction of the change here */
-color: #fff;
-text-decoration: none;
+color: var(--btn-color);
+background-color: var(--glow-color);
+box-shadow: 0 0 1em .25em var(--glow-color),
+        0 0 4em 2em var(--glow-spread-color),
+        inset 0 0 .75em .25em var(--glow-color);
 }
 
 .btn:active {
-transform: scale(0.95);
+box-shadow: 0 0 0.6em .25em var(--glow-color),
+        0 0 2.5em 2em var(--glow-spread-color),
+        inset 0 0 .5em .25em var(--glow-color);
 }

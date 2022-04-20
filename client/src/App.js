@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element = { <InitialPage/>}/>
         <Route path='/videogames' element = { <Videogames/>}/>
-        <Route path='/Detailvideogame' element = { <Detailvideogame/>}/>
+        <Route path='/videogames/:id' element = { <Detailvideogame/>}/>
         <Route path='/Createvideogame' element = { <CreateVideogame/>}/>
         <Route path='*' element={<Notfound/>}/>
       </Routes>
