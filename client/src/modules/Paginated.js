@@ -13,7 +13,7 @@ function Paginated({videogamesPerPage, allVideogames, paginated}) {
                     {
                         numberPages?.map( n => (
                             <li className='number' key={n}>
-                                <a onClick={paginated}>{n}</a>
+                                <a onClick={ () => paginated(n)}>{n}</a>
                             </li>
                         ))
                     }

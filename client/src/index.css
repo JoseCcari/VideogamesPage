@@ -1,22 +1,3 @@
-
-#root{
-  height: 100vh;
-  background-attachment: fixed;
-
-  background: linear-gradient(132deg, var(--Page-home), var(--glow-color));
-  background-size: 400% 400%;
-  animation: BackgroundGradient 50s ease infinite;
-
-  height: 100vh;
-}
-body {
-  font-family: 'Roboto', sans-serif , 'Segoe UI', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-}
-
 *{
   margin: 0;
   padding: 0;
@@ -28,6 +9,22 @@ body {
   --enhanced-glow-color: rgb(231, 206, 255);
   --btn-color: rgb(100, 61, 136);
 }
+#root{
+  background: #24282f;/* linear-gradient(132deg, var(--Page-home), var(--glow-color)); */
+  background-size: 400% 400%;
+  animation: BackgroundGradient 50s ease infinite;
+  height: 100vh;
+  background-attachment: fixed;
+}
+body {
+  font-family: 'Roboto', sans-serif , 'Segoe UI', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

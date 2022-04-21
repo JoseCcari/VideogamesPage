@@ -1,17 +1,13 @@
 import React from 'react'
-
+import './Card.css'
 function Card({name , image_background , genres}) {
   return (
-    <div>
-        <h3>{name}</h3>
-        <h5>{genres}</h5>
-        <img 
-            src= {image_background} 
-            alt="image Videogame"
-            width="400px"
-            height="400px"
-         />
-    </div>
+    <figure className="card">
+      <img src={image_background} alt="image Videogame" />
+      <figcaption>{name}</figcaption>
+      <h4>{genres}</h4>
+    
+    </figure>
   )
 }
 

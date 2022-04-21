@@ -12,9 +12,7 @@ function Videogames() {
     const dispatch = useDispatch()
     const allVideogames = useSelector ((state)=> state.videogames)
     //const [loadingVideogames, setLoadingVideogames] = useState(true)
-    useEffect( ()=>{
-        dispatch( getVideogames() )
-    }, [dispatch])
+    
 
     const [currentPage, setCurrentPage]= useState(1);
     const [videogamesPerPage, setVideogamesPerPage]= useState(15);
@@ -25,6 +23,11 @@ function Videogames() {
     const paginated = (numberPage)=>{
         setCurrentPage(numberPage);
     }
+
+
+    useEffect( ()=>{
+        dispatch( getVideogames() )
+    }, [dispatch])
 
     function handleClick(event) {
         event.preventDefault();
@@ -44,7 +47,6 @@ function Videogames() {
         <div className='navBar'> 
             
             <button  onClick={handleClick}> Refresh </button>
-            {/* input de busqueda por videojuego */}
             <select onChange={ (e)=> handleSortVideogames(e)}>
                 <option value="asc">Ascendente</option>
                 <option value="des">Descendente</option>
@@ -64,21 +66,27 @@ function Videogames() {
                     paginated={paginated}
             />
         </div>
-        <div className='Cards'>
-            
+        <div class="wrapper">
+
+            <h2><strong>All Videogames<span>({allVideogames.length})</span></strong></h2>
+        <div className='cards'>
            
         {
             currentVideogames?.map( (v)=> {
                     return (
-                    <Card 
-                        key={v.id} 
-                        name={v.name} 
-                        image_background={v.background_image} 
-                        genres= {v.genres.map ((g , index) => (<p key = {index}> {g.name} </p>))}
-                    />)
+                        <Link to={`/videogames/${v.id}`}>
+                            <Card 
+                                key={v.id} 
+                                name={v.name} 
+                                image_background={v.background_image} 
+                                genres= {v.genres.map ((g , index) => (<p key = {index}> {g.name} </p>))}
+                            />
+                        </Link>
+                    )
                 }
             )
         }
+        </div>
         </div>
     </div>
   )

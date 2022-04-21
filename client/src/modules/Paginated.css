@@ -11,7 +11,7 @@
   font-kerning: auto;
 }
 .data-pagination {
-    font-size: 8pt;
+    font-size: 10pt;
     line-height: 1;
     font-weight: 400;
     font-family: 'Open Sans', 'Source Sans Pro', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
@@ -50,28 +50,28 @@
   }
   /* Disabled & Hidden Styles */
   .data-pagination .disabled,
-  .data-pagination [hidden],
-  .data-pagination [disabled] {
+  .data-pagination .hidden,
+  .data-pagination .disabled {
     opacity: .5;
     pointer-events: none;
   }
   @media (min-width: 350px) {
     .data-pagination {
-      font-size: 10pt;
+      font-size: 12pt;
     }
   }
   @media (min-width: 500px) {
     .data-pagination {
-      font-size: 12pt;
+      font-size: 14pt;
     }
   }
   @media (min-width: 700px) {
     .data-pagination {
-      font-size: 14pt;
+      font-size: 16pt;
     }
   }
   @media (min-width: 900px) {
     .data-pagination {
-      font-size: 16pt;
+      font-size: 18pt;
     }
   }

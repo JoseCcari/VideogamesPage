@@ -1,0 +1,20 @@
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #53e2e9;
+}
+#controlIcon {
+    margin: 0.7rem 0.7rem 0.7rem 0.7rem;
+}
+
+.left-nav {
+
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.title-header {
+    display: inline;
+}
