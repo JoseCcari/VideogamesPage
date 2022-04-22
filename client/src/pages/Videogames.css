@@ -1,11 +1,6 @@
-.Home{
-    
-}
-.navBar{
-    width: 100vw;
-}
+
+
 .Cards{
-    margin-top: 100px;
     display: grid;
     place-items: center;
     grid-template-columns: 20% 20% 20% 20% 20%;
@@ -13,3 +8,85 @@
 .Paginado {
     display: flex;
 }
+
+.navBar{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items:center ;
+    position: relative;
+    background-color: brown;
+    height: 100px;  
+}
+.image{
+    background-image: url('../assets/logo5.png');
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+}
+
+/* FILTERS */
+.filters{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: brown;
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    margin : 15px ;
+}
+select {
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;
+    outline:0;
+    box-shadow:none;
+    border:0!important;
+    background: #5c6664;
+    background-image: none;
+    flex: 1;
+    padding: 0 .5em;
+    color:#fff;
+    cursor:pointer;
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+ }
+ select::-ms-expand {
+    display: none;
+ }
+ .select {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    line-height: 3;
+    background: #5c6664;
+    overflow: hidden;
+    border-radius: 5px;
+    margin: 10px ;
+ }
+ .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 2px;
+    background: #2b2e2e;
+    cursor:pointer;
+    pointer-events:none;
+    transition:.25s all ease;
+ }
+ .select:hover::after {
+    color: #23b499;
+ }
+
+
+
+
+
+/* SEARCHBAR*/
+

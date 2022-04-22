@@ -1,6 +1,7 @@
 import {GET_VIDEOGAMES, FILTER_BY_CREATED, NAME_BY_QUERY,
 CREATE_NEW_VIDEOGAME,GET_GENRES,
- GET_DETAIL_VIDEOGAME, ORDER_BY_NAME} from '../actions'
+ GET_DETAIL_VIDEOGAME, ORDER_BY_NAME , 
+ ORDER_BY_RATING, FILTER_BY_GENRE} from '../actions'
 
 const initialState = {
     videogames : [],
@@ -64,6 +65,29 @@ function rootReducer( state = initialState , action){
                 ...state,
                 videogames:sortedVideogames
 
+            }
+        case ORDER_BY_RATING:
+            let ratingVideogames = action.payload === 'major'?
+            state.videogames.sort((a,b) => b.rating - a.rating ):
+            state.videogames.sort((a,b) => a.rating - b.rating );
+            return {
+                ...state,
+                videogames:ratingVideogames
+            }
+        case FILTER_BY_GENRE:
+            console.log(action.payload)
+            const genresVideo = []
+            state.allVideogames.forEach
+            (v => v.genres.forEach( g => {
+        
+                if (g.name === action.payload)
+                    genresVideo.push(v)
+                }
+                ) )
+            console.log(genresVideo)
+            return {
+                ...state,
+                videogames:genresVideo
             }
         default:
             return state
