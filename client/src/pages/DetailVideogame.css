@@ -1,0 +1,95 @@
+
+.Container{
+    /* max-width: 1920px; */
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    font-family: var(--font-family);
+    color: var(--dark-color);
+    background: var(--bg-gradient);
+} 
+strong {
+    font-weight: 600;
+}
+.overlay {
+    width: 100%;
+    max-width: 1140px;
+    max-height: 640px;
+    padding: 7rem 5rem;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.375);
+    box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+  .overlay__inner {
+    max-width: 36rem;
+    position: relative;
+  }
+  .overlay__inner p {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 2px;
+    
+}
+
+  .overlay__title {
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 20px ;
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(
+      45deg,
+      var(--base) 25%,
+      var(--complimentary2)
+    );
+ 
+  }
+  
+  .overlay__description {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /*AQUIII*/
+
+  .overlay__btn{
+    height: 35px;
+    line-height: 35px;
+    width: 20%;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    margin: 15px 5px ;
+}
+.overlay__btn:hover{
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.2);
+    color: aquamarine;
+}
+.imageVideoGame{
+    position: absolute;
+    z-index: 0;
+    height: 50%;
+    width: 50%;
+    right:-55%;
+    bottom: 25%;
+    border:  3px 0px 30px rgba(163, 163, 163, 0.2);
+    border-radius: 2px;
+}
+.imageContainer{
+    height: 20%;
+}
+.overlay span{
+    display: inline-block;
+}

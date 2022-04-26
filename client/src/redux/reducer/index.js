@@ -75,7 +75,6 @@ function rootReducer( state = initialState , action){
                 videogames:ratingVideogames
             }
         case FILTER_BY_GENRE:
-            console.log(action.payload)
             const genresVideo = []
             state.allVideogames.forEach
             (v => v.genres.forEach( g => {
@@ -87,7 +86,7 @@ function rootReducer( state = initialState , action){
             console.log(genresVideo)
             return {
                 ...state,
-                videogames:genresVideo
+                videogames:action.payload === "Todos" ?state.allVideogames: genresVideo
             }
         default:
             return state

@@ -1,7 +1,6 @@
 
 .initialPage{
-    background-image: url('../assets/image3.jpg');
-    background-repeat: no-repeat;
+    background: url('../assets/image3.jpg') no-repeat fixed center;
     background-position: center center;
     height: 100vh;
     background-size: cover;
@@ -9,12 +8,23 @@
     
 }
 .title{
-    color: var(--glow-color);
-    font-size: 2.5rem;
- 
+    color: var(--color-light);
+    padding: 2px;
+    font-size: 4.5rem;
+    font-weight: 700;
+    height: 80px;
     position: absolute;
-    top: 20px ;
-    left: 100px;
+    top: 25% ;
+    right: 35%;
+    background-image: linear-gradient(
+        45deg,
+        var(--base) 25%,
+        var(--complimentary2)
+      );
+    box-shadow: 0.3 1.75rem 4rem 0 rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.125);
+    opacity: 0.7;
 }
 .buttonContainer{
     position: absolute;

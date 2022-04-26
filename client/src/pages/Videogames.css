@@ -19,12 +19,34 @@
     background-color: brown;
     height: 100px;  
 }
-.image{
+/* .image{
     background-image: url('../assets/logo5.png');
     background-size: cover;
     height: 50px;
     width: 50px;
+    z-index: 100;
+    background-color: transparent;
+    opacity: 0.5;
 }
+ */
+image {
+    width: 200px;
+    height: 200px;
+    display: block;
+    position: relative;
+  }
+  
+  image::after {
+    content: "";
+    background-image: url('../assets/logo5.png');
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 100;   
+  }
 
 /* FILTERS */
 .filters{
@@ -60,16 +82,16 @@ select {
  .select {
     position: relative;
     display: flex;
-    width: 100%;
-    height: 100%;
-    line-height: 3;
+    width: 90%;
+    height: 90%;
+    line-height:50px;
     background: #5c6664;
     overflow: hidden;
     border-radius: 5px;
     margin: 10px ;
  }
  .select::after {
-    content: '\25BC';
+    /* content: '\25BC'; */
     position: absolute;
     top: 0;
     right: 0;
@@ -82,10 +104,38 @@ select {
  .select:hover::after {
     color: #23b499;
  }
+.create{
+    height: 40px;
+    line-height: 40px;
+    width: 100px;
+    background-color: rgb(46, 161, 161);
+    color: rgb(176, 199, 207);
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    margin-left: -30px;
+    text-decoration: none;
+}
+
+.Home h3{
+    font-weight: 700;
+    padding: 5px;
+    min-height: 40px;
+}
 
 
-
-
+.loading{
+    font-size: 50px;
+    animation: boldeando 2s infinite;
+}
+@keyframes boldeando{
+    from {
+        color: black;
+    }
+    to{
+        color: rgb(255, 217, 0)
+    }
+}
 
 /* SEARCHBAR*/
 

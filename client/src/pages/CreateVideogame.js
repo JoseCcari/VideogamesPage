@@ -4,131 +4,188 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getGenres,createNewVideogame} from '../redux/actions'
 import Input from '../modules/Input'
 import './CreateVideogame.css'
-
+import {Formu,ButonCenter, Button, MessageSuccess, MessageError, Label,CustomError} from '../modules/CreateGame'
 function CreateVideogame() {
   const dispatch= useDispatch()
   const genres = useSelector ( (state) => state.genres)
-  const [input, setInput] = useState( {
-    name: "",
-    description: "",
-    releaseDate: "",
-    image_background: "",
-    rating: "",
-    genres: []
-  }) 
 
-  useEffect( ()=> {
-    dispatch(getGenres())
-  }, [])
+    useEffect( ()=> {
+      dispatch(getGenres())
+    }, [dispatch])
 
-  function handleChangeForm(e){
-    setInput(
-      {
-        ...input,
-        [e.target.name]: e.target.value
-      }
-    )
-  }
+  const [name, setName] = useState({value:"", validate: null})
+  const [description, setDescription] = useState({value:"", validate: null})
+  const [releaseDate, setReleaseDate] = useState({value:"", validate: null})
+  const [image_background, setImage_background] = useState({value:"", validate: null})
+  const [rating, setRating] = useState({value: "", validate: null})
+  const [genresVideogame, setGenresVideogame] = useState({value:[], validate: "false"})
+  const [formularioValido, setFormularioValido] = useState(null)
+
+  const Regx = {
+		description: /^(.|\s)*[a-zA-Z]+(.|\s)*$/, // Letras, numeros, guion y guion_bajo
+		name: /^[a-zA-ZÀ-ÿ0-9\s]{2,50}$/, // Letras y espacios, pueden llevar acentos.
+		rating:  /^([0-4]{1}(\.\d{1,2})?|5(.0{1,2})?)$/,
+    image: /.*?(\/[\/\w\.]+)[\s\?]?.*/, //Admite barras 
+    date: /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/ 
+	}
 
   function handleSelectGenres (e){
-    setInput({
-      ...input,
-      genres:[...input.genres,e.target.value]
+    if(!genresVideogame.value.includes(e.target.value)){
+      setGenresVideogame({
+        ...genresVideogame,
+        value: [...genresVideogame.value, e.target.value ],
+        validate: genresVideogame.value.length>0 ? "true" : "false" 
+      })
+      
+    }
+    
+
+   }
+
+   function handleDeleteGenres (game){
+    const myGenereDelete = genresVideogame.value.filter(element => element !== game );
+    console.log("antes",myGenereDelete)
+    setGenresVideogame({
+      validate: genresVideogame.validate,
+      value:  myGenereDelete
     })
   }
-  function handleDeleteGenres (g){
-    setInput({
-      ...input,
-      genres: input.genres.filter(el => el !== g)
-    })
-  }
+
+  // function handleDeleteGenres (index){
+  //   console.log("antes",myGenereDelete)
+  //   console.log("deleted", index)
+  //   const myGenereDelete = genresVideogame.value.splice(index, 1);
+  //   setGenresVideogame({
+  //     ...genresVideogame,
+  //     value:  myGenereDelete
+  //   }
+  //   )
+  // }
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createNewVideogame(input) )
+    if(
+      name.validate === "true" &&
+      description.validate === "true" &&
+      releaseDate.validate === "true" &&
+      rating.validate === "true" &&
+      image_background.validate === "true" &&
+      genresVideogame.validate === "true" 
+    ){
+      setFormularioValido(true)
+      setDescription({value: "" , validate: null})
+      setReleaseDate({value: "" , validate: null})
+      setRating({value: "" , validate: null})
+      setImage_background({value: "" , validate: null})
+      setImage_background({value: "" , validate: null})
+      setGenresVideogame({value: [], validate: null})
+      //dispatch(createNewVideogame(input) )
+    }
+    else{
+      setFormularioValido(false)
+    }
+
+
+    
   }
+
+
   return (
     <>
     <div className='botonBack'>
-    <Link to="/videogames"> <button>Volver</button></Link>
+    <Link to="/videogames"> <Button>Volver</Button></Link>
     </div>
-    
     
     <main className='containerForm'>
       
       <h3>Create your Videogame</h3>
-      <form action="">
+      <Formu action="">
         <Input 
-
+          placeholder={"Name videogame"}
           title = {"Name"} 
           type= {"text"}
-          value={input.name}
+          stateInput={name}
           name={"name"}
-          onchange={handleChangeForm}
+          setStateInput={setName}
           htmlfor={"NameFor"}
-          customError={""}
+          customError={"Solo puede contener letras espacios y números, con un mínimo de 2 letras y un máximo de 50 letras!"}
+          expressionReg={Regx.name}
         />
         <Input
+          placeholder={"Description videogame"}
           title = {"Description"} 
           type= {"text"}
-          value={input.description}
+          stateInput={description}
           name={"description"}
-          onchange={handleChangeForm}
+          setStateInput={setDescription}
           htmlfor={"DescriptionFor"}
-          customError={""}
+          customError={"Debe contener al menos una letra"}
+          expressionReg={Regx.description}
         />
         <Input
+          placeholder={"Release Date videogame"}
           title = {"Release Date:"} 
-          type= {"text"}
-          value={input.releaseDate}
+          type= {"date"}
+          stateInput={releaseDate}
           name={"releaseDate"}
-          onchange={handleChangeForm}
+          setStateInput={setReleaseDate}
           htmlfor={"releaseDateFor"}
-          customError={""}
+          customError={"Ingrese un Mes/Día/Año válido!"}
+          expressionReg={Regx.date}
         />
 
         <Input
+          placeholder={"Rating of videogame"}
           title = {"Rating:"} 
-          type= {"text"}
-          value={input.rating}
+          type= {"number"}
+          stateInput={rating}
           name={"rating"}
-          onchange={handleChangeForm}
+          setStateInput={setRating}
           htmlfor={"ratingFor"}
-          customError={""}
+          customError={"Solo admite números entre 0 a 5 ,enteros o decimales con hasta dos decimales ejemplo 4.32!!"}
+          expressionReg={Regx.rating}
         />
         <Input
+          placeholder={"http/mygame.com"}
           title = {"Path of Image:"} 
           type= {"text"}
-          value={input.image_background}
+          stateInput={image_background}
           name={"image_background"}
-          onchange={handleChangeForm}
+          setStateInput={setImage_background}
           htmlfor={"image_backgroundFor"}
-          customError={""}
+          customError={"Ingrese un path válido"}
+          expressionReg={Regx.image}
         />
         <div>
-          <label>Genres: </label>
+          <Label>Genres: </Label>
           <select onChange={(e)=> handleSelectGenres(e)}>
-            {genres.map((g ,i) => (<option key={i} value = {g.name}> {g.name}</option>))}
+            {genres.map((g, index ) => (
+              <option key= {index} value={g.name}> {g.name}</option>)
+            )}
+            
           </select>
-          {input.genres.map((genre,index) =>  
+          {genresVideogame.validate ==="false" && <p className='errorSelect'>Necesita agregar al menos 1 genero!</p>}
+          {genresVideogame.value.map((genre, index) =>  
                 (
-                  <div  key= {index}> 
+                  <div className='listGenres' key={index} > 
                     <p>{genre}</p>
-                    <button onClick={(e) => handleDeleteGenres(genre)}>X</button>
+                    {/* <button onClick={() => {handleDeleteGenres(index)}}>X</button> */}
+                    <button onClick={() => {handleDeleteGenres(genre)}}>X</button>
                   </div>
                 )
                 )}
         </div>
-       {false && <div className="messageError">
-                <p>Por favor llena el formulario correctamente!</p>
-        </div>}
-        <div className='botonCenter'>
-          <button type='submit' onClick={(e)=>handleSubmit(e)}>Crear</button>
-          <p className='messageSuccess'>El formulario se envió exitosamente!</p>
-        </div>
+       {formularioValido === false && 
+        <MessageError>
+                  <p>Por favor llena todo el formulario correctamente!</p>
+          </MessageError>}
+        <ButonCenter>
+          <Button type='submit' onClick={(e)=>handleSubmit(e)}>Crear</Button>
+          {formularioValido === true && <MessageSuccess>El formulario se envió exitosamente!</MessageSuccess>}
+        </ButonCenter>
         
         
-      </form>
+      </Formu>
       
 
     </main>

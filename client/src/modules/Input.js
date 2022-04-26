@@ -1,20 +1,49 @@
 import React from 'react'
-import ex from '../assets/borrar.png'
-import check from '../assets/comprobado.png'
-function Input({title, type, value, name, onchange,htmlfor,customError}) {
+
+import {Label, GrupoInput, InputForm, CustomError} from './CreateGame'
+function Input({title,placeholder, type, stateInput, name, setStateInput,htmlfor,customError,expressionReg}) {
+  
+  function handleChangeInput(e){
+    setStateInput(
+      {
+        ...stateInput,
+        value: e.target.value
+      }
+    )
+  }
+
+  const validationInput = ()=>{
+    if (expressionReg){
+      if(expressionReg.test(stateInput.value)){
+        setStateInput({...stateInput, validate: "true"})
+
+      }
+      else {
+        setStateInput({...stateInput, validate: "false"})
+
+      }
+    }
+  }
+  
+  
   return (
     <div>
-          <label htmlFor={htmlfor}>{title}</label>
-          <div className='grupoInput'>
-            <input 
+          <Label htmlFor={htmlfor} valido={stateInput.validate}>{title}</Label>
+          <GrupoInput >
+            <InputForm 
+              placeholder={placeholder}
               type={type} 
-              value={value}
+              value={stateInput.value}
               name= {name}
-              onChange={onchange}  
+              onChange={handleChangeInput}  
               id={htmlfor} 
+              onKeyUp={validationInput}
+              onBlur={validationInput}
+              valido= {stateInput.validate}
             />
-            <p className='customError'>{customError}</p>
-          </div>
+            
+            <CustomError valido= {stateInput.validate}>{customError}</CustomError>
+          </GrupoInput>
         </div>
   )
 }

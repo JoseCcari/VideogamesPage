@@ -15,7 +15,7 @@ function App() {
         <Route path='/' element = { <InitialPage/>}/>
         <Route path='/videogames' element = { <Videogames/>}/>
         <Route path='/videogames/:id' element = { <Detailvideogame/>}/>
-        <Route path='/Createvideogame' element = { <CreateVideogame/>}/>
+        <Route path='/CreateVideogame' element = { <CreateVideogame/>}/>
         <Route path='*' element={<Notfound/>}/>
       </Routes>
     </BrowserRouter>

@@ -18,6 +18,32 @@ const getApiVideogames = async () => {
     return totalVideogames
 }
 
+const getBbVideogames = async() => {
+
+  const videoGames = []
+  const videogamesDB = await Videogame.findAll(
+    {
+      attributes: ["id","name", "rating" ,"background_image","createInDatabase"],
+      include: [Genre]
+    }
+  ) 
+  videogamesDB.forEach ( (vg) => {
+    videoGames.push({
+      id: vg.id,
+      name: vg.name,
+      genres: vg.genres.map((genre)=>{
+        return {
+          id:genre.id,
+          name: genre.name
+        }
+      }),
+      rating: vg.rating,
+      background_image: vg.background_image,
+      createInDatabase: vg.createInDatabase
+    })
+  })
+  return videoGames
+}
 const getAllVideogames =  async () => {
     const videoGames = [];
     const countVideoGames = await Videogame.count();
@@ -70,14 +96,16 @@ const getAllVideogames =  async () => {
 }
 
 const hasQueryName = async (name) => {
-  console.log("inicio" , name)
+/*   console.log("inicio" , name)
   const nameQuery = name.toLocaleLowerCase(); 
-  console.log("medio" , nameQuery)
-  encodeURI(nameQuery);
-  console.log("final" , encodeURI(nameQuery) ) 
+  console.log("medio" , nameQuery) */
+  encodeURI(name);
+
+  const BDvideogames = await getBbVideogames();
+  const DBFilterByName = BDvideogames.filter(v => v.name.includes(name))
 
   const arrayGames = [];
-  const game = await axios(`https://api.rawg.io/api/games?search=${nameQuery}&key=${API_KEY}`);
+  const game = await axios(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`);
   const { results } = game.data;
   if (results.length === 0) { 
     throw new Error('no games found with that name')

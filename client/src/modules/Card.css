@@ -15,7 +15,7 @@
   position: relative;
   font-family: 'Poppins', sans-serif;
   margin-bottom: 5%;
-  gap: 20px;
+  gap: 15px;
 }
 
 h2:after,
@@ -98,12 +98,12 @@ h2:after {
 }
 .cards {
   flex-flow: row wrap;
-  padding-left: 50px;
+  padding-left: 40px;
 }
 .cards .card {
   margin: 15px;
-  width: 195px;
-  height: 300px;
+  width: 200px;
+  height: 310px;
   overflow: hidden;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
   transform-origin: center top;
@@ -122,8 +122,9 @@ h2:after {
   padding: 20px;
   padding-bottom: 210px;
   font-size: 24px;
+  font-weight: 500;
   background: none;
-  color: #fff;
+  color: #d7e7eb;
   transform: translateY(100%);
   transition: 0.3s;
   background-image: linear-gradient(
@@ -181,13 +182,13 @@ h2:after {
   height: 100%;
   top: -90%;
   left: -20px;
-  opacity: 0.1;
+  opacity: 0.2  ;
   transform: rotate(45deg);
   background: linear-gradient(
     to top,
     transparent,
-    #fff 15%,
-    rgba(255, 255, 255, 0.5)
+    rgb(255, 255, 255) 15%,
+    rgba(202, 194, 194, 0.5)
   );
   transition: 0.3s;
 }

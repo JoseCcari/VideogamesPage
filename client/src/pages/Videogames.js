@@ -30,10 +30,10 @@ function Videogames() {
         dispatch( getVideogames() )
     }, [dispatch])
 
-    function handleClick(event) {
+/*     function handleClick(event) {
         event.preventDefault();
         dispatch( getVideogames());
-    }
+    } */
     function handleClickCreated(event) {
         setCurrentPage(1);
         dispatch( filterByCreated(event.target.value));
@@ -61,12 +61,11 @@ function Videogames() {
     return (
     <div className='Home'>
         <div className='navBar'> 
-            <div className='image'>
-                <Link to="/videogames">
-                    <a className="logo" /> 
-                </Link>
-            </div>
+            
+            <h3>Filters: </h3>
+            
             <div className='filters'>
+                
                 <div className='select'>
                     <select  id="format" onChange={ (e)=> handleSortByName(e)}>
                         <option value="asc">Ascendente</option>
@@ -90,7 +89,8 @@ function Videogames() {
                     </select>
                 </div>
                 <div className='select'>
-                    <select id="format" onChange={ (e)=> handleFilterByGenre(e)} >
+                    <select id="format2" onChange={ (e)=> handleFilterByGenre(e)} >
+                        <option value="Todos">Genres</option>
                         <option value="Action">Action</option>
                         <option value="Shooter">Shooter</option>
                         <option value="Platformer">Platformer</option>
@@ -117,12 +117,13 @@ function Videogames() {
             <div className='wrap'>
                 <SearchBar/>
             </div>
-            <div className='create'>
-                <Link to= '/CreateVideogame' > Create </Link>
+            <Link to= '/CreateVideogame'style={{ textDecoration: 'none' }} > 
+            <div className='create' >
+                 Create 
             </div>
-            
+            </Link>
         </div>
-        <button  onClick={handleClick}> Refresh </button>
+        {/* <button  onClick={handleClick}> Refresh </button> */}
         <div className='Paginado'>
             <Paginated
                     videogamesPerPage={videogamesPerPage}
@@ -130,21 +131,22 @@ function Videogames() {
                     paginated={paginated}
             />
         </div>
-        <div className="wrapper">
+        
+        {allVideogames.length > 0 ?<div className="wrapper">
 
             <h2><strong>All Videogames<span>({allVideogames.length})</span></strong></h2>
         <div className='cards'>
            
         {
-            currentVideogames?.map( (v)=> {
+            currentVideogames?.map( (v , index)=> {
                     return (
-                        <Link to={`/videogames/${v.id}`}>
+                        <Link to={`/videogames/${v.id}`} key={`videogame-${index}`}>
                             <Card 
                                 key={v.id} 
                                 name={v.name} 
                                 image_background={v.background_image} 
                                 rating={v.rating}
-                                genres= {v.genres.map ((g , index) => (<p key = {index}> {g.name} </p>))}
+                                genres= {v.genres.map ((g , index) => (<p key = {`genere-${index}`}> {g.name} </p>))}
                             />
                         </Link>
                     )
@@ -159,7 +161,11 @@ function Videogames() {
                     paginated={paginated}
             />
         </div>
-        </div>
+        </div>: 
+        
+        <div className='loading'>
+            <p className='loadingp'>Loading...</p>    
+        </div>}
     </div>
   )
 }

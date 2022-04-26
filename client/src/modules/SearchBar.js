@@ -11,6 +11,11 @@ function SearchBar() {
         event.preventDefault();
         setName(event.target.value)
     }
+    function handleKeyDown(e) {
+        if(e.keyCode === 13) { 
+            dispatch(getNameVideogames(name));
+      }
+    }
     function handleSubmit(e){
         e.preventDefault();
         dispatch(getNameVideogames(name));
@@ -23,6 +28,7 @@ function SearchBar() {
             type="text" 
             placeholder='Buscar videogame ...'
             onChange={(e) => handleInputChange(e)}
+            onKeyDown={ (e) => handleKeyDown(e)}
         />
         <button 
             className='searchButton'
