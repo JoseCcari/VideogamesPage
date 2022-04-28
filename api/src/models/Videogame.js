@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
     },
     background_image: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
 
 
@@ -49,3 +49,6 @@ module.exports = (sequelize) => {
     updatedAt: false
   });
 };
+
+
+// ["PC","PlayStation 5", "PlayStation 4", "Xbox One", "Xbox Series S/X", "Nintendo Switch","iOS","Android","Nintendo 3DS","name": "Nintendo DS",]

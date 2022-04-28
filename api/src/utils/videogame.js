@@ -35,9 +35,8 @@ const searchGameDB =  async ( idVideogame) => {
                             filter(videog => videog.id === idVideogame);  
        
         return matchVideogame
-
-    
 }
+
 const searchGameApi =  async ( idVideogame) => {  
     const findVideogameApi = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`);
     if (findVideogameApi === undefined){

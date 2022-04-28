@@ -18,6 +18,7 @@
     font-weight: 700;
     padding: 10px;
     min-height: 40px;
+    height: 20px;
 }
 
 .searchButton{
@@ -29,7 +30,7 @@
     font-weight: bold;
     border: none;
     border-radius: 3px;
-    margin: 5px;
+    margin: 15px;
 }
 .searchButton:hover{
     box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.2);
