@@ -56,6 +56,7 @@ const getAllVideogames =  async () => {
         }
       ) 
       videogamesDB.forEach ( (vg) => {
+        console.log(vg.genres)
         videoGames.push({
           id: vg.id,
           name: vg.name,
@@ -96,61 +97,45 @@ const getAllVideogames =  async () => {
 }
 
 const hasQueryName = async (name) => {
-/*   console.log("inicio" , name)
-  const nameQuery = name.toLocaleLowerCase(); 
-  console.log("medio" , nameQuery) */
-  encodeURI(name);
-
   const BDvideogames = await getBbVideogames();
   const DBFilterByName = BDvideogames.filter(v => v.name.includes(name))
-
-  const arrayGames = [];
   const game = await axios(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`);
   const { results } = game.data;
-  if (results.length === 0) { 
+  if (DBFilterByName.length === 0 && results.length ===0 ){
     throw new Error('no games found with that name')
   }
-  let countGames = 0;
-  results.forEach( (result) => {
-    const { id, name, background_image, genres, rating } = result;
-    if (countGames<15) {
-      arrayGames.push({
-        id,
-        name,
-        background_image,
-        genres: genres.map((genre) => {
-            return { name: genre.name, id: genre.id };
-        }),
-        rating
-      });
-      countGames++;
+  else {
+    if (DBFilterByName.length > 15 ){
+      return DBFilterByName.slice(0,15)
     }
+    else {
+      console.log("entre aqui")
+      let countGames = DBFilterByName.length;
+      results.forEach( (result) => {
+        const { id, name, background_image, genres, rating } = result;
+        if (countGames<15) {
+          DBFilterByName.push({
+            id,
+            name,
+            background_image,
+            genres: genres.map((genre) => {
+                return { name: genre.name, id: genre.id };
+            }),
+            rating
+          });
+          countGames++;
+        }
+    
+      })
+    }
+  
+  }
 
-  })
-
-  return arrayGames
+  return DBFilterByName
+  
 
 }
 
-const getVideogamesfromDbByName = async (name) => {
-  let videogamesByName = await Videogame.findAll( {
-      attributes: ["id","name","background_image","rating","createInDatabase"],
-      where: {
-          name: {
-              [Op.substring]: name
-          }
-      },
-      include: {
-          model: Genre,
-          attributes: ["name"],
-          through:{
-              attributes: []
-          }
-      }
-  });
-
-  return videogamesByName
-}
 
 module.exports = {
     getApiVideogames,

@@ -40,13 +40,11 @@ function Detailvideogame() {
             <span> <strong>Rating:</strong> </span>
             <p >  {videoGame[0].rating}</p>
             
-            <p > <strong>Genres:</strong> { videoGame[0].genres.map((g,index) => (<p key={index } >{g}</p>) ) }</p>
-            
-            {
-              videoGame[0].createInDatabase? 
-               <p ><strong>Platforms:</strong> {videoGame[0].platforms.join(" ").map((p,index) => (<p key={index } >{p}</p>) )}</p>
-                :<p ><strong>Platforms:</strong> {videoGame[0].platforms.map((p,index) => (<p key={index } >{p}</p>) )}</p>
-              }
+            {videoGame[0].id.length < 15 ?  
+              <p > <strong>Genres:</strong> { videoGame[0].genres.map((g,index) => (<p key={index } >{g}</p>) ) }</p> 
+              :  <p > <strong>Genres:</strong> { videoGame[0].genres.map((g,index) => (<p key={index } >{g.name}</p>) ) }</p> }
+
+            <p > <strong>Platforms:</strong> {videoGame[0].platforms.map((p,index) => (<p key={index } >{p}</p>) )}</p>
             <div className='overlay__btns'>
               <Link to= '/videogames'> 
                 <button className='overlay__btn ' >Go back</button>
