@@ -20,6 +20,12 @@
     min-height: 40px;
     height: 20px;
 }
+.formSearch{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
 .searchButton{
     height: 35px;

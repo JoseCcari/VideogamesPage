@@ -25,35 +25,6 @@ function rootReducer(state = initialState, action) {
 				videogames: action.payload,
 				allVideogames: action.payload,
 			};
-		case FILTER_BY_CREATED:
-			const filterCreated =
-				action.payload === 'Created'
-					? state.allVideogames.filter((v) => v.createInDatabase)
-					: state.allVideogames.filter((v) => !v.createInDatabase);
-			return {
-				...state,
-				videogames:
-					action.payload === 'All' ? state.allVideogames : filterCreated,
-			};
-		case NAME_BY_QUERY:
-			return {
-				...state,
-				videogames: action.payload,
-			};
-		case CREATE_NEW_VIDEOGAME:
-			return {
-				...state,
-			};
-		case GET_GENRES:
-			return {
-				...state,
-				genres: action.payload,
-			};
-		case GET_DETAIL_VIDEOGAME:
-			return {
-				...state,
-				detail: action.payload,
-			};
 		case ORDER_BY_NAME:
 			let sortedVideogames =
 				action.payload === 'asc'
@@ -81,6 +52,22 @@ function rootReducer(state = initialState, action) {
 				...state,
 				videogames: ratingVideogames,
 			};
+		case FILTER_BY_CREATED:
+			let filterCreated =
+				action.payload === 'Created'
+					? state.allVideogames.filter((v) => v.createInDatabase)
+					: state.allVideogames.filter((v) => !v.createInDatabase);
+
+			if (filterCreated.length === 0) {
+				alert('none found');
+				return state;
+			}
+
+			return {
+				...state,
+				videogames:
+					action.payload === 'All' ? state.allVideogames : filterCreated,
+			};
 		case FILTER_BY_GENRE:
 			const genresVideo = [];
 			state.allVideogames.forEach((v) =>
@@ -88,12 +75,35 @@ function rootReducer(state = initialState, action) {
 					if (g.name === action.payload) genresVideo.push(v);
 				})
 			);
-			console.log(genresVideo);
+			if (genresVideo.length === 0) {
+				alert('No results were found');
+				return state;
+			}
 			return {
 				...state,
 				videogames:
-					action.payload === 'Todos' ? state.allVideogames : genresVideo,
+					action.payload === 'All' ? state.allVideogames : genresVideo,
 			};
+		case NAME_BY_QUERY:
+			return {
+				...state,
+				videogames: action.payload,
+			};
+		case CREATE_NEW_VIDEOGAME:
+			return {
+				...state,
+			};
+		case GET_GENRES:
+			return {
+				...state,
+				genres: action.payload,
+			};
+		case GET_DETAIL_VIDEOGAME:
+			return {
+				...state,
+				detail: action.payload,
+			};
+
 		default:
 			return state;
 	}

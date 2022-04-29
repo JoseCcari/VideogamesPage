@@ -1,6 +1,11 @@
 import React from 'react';
 import './Paginated.css';
-function Paginated({ videogamesPerPage, allVideogames, paginated }) {
+function Paginated({
+	videogamesPerPage,
+	allVideogames,
+	paginated,
+	currentPage,
+}) {
 	const numberPages = [];
 	const totalPage = Math.ceil(allVideogames / videogamesPerPage);
 	for (let i = 0; i < totalPage; i++) {
@@ -11,7 +16,12 @@ function Paginated({ videogamesPerPage, allVideogames, paginated }) {
 			<ul>
 				{numberPages?.map((n) => (
 					<li className='number' key={n}>
-						<a onClick={() => paginated(n)}>{n}</a>
+						<button
+							className={currentPage === n ? 'pageActive' : 'pageNormal'}
+							onClick={() => paginated(n)}
+						>
+							{n}
+						</button>
 					</li>
 				))}
 			</ul>

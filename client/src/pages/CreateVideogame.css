@@ -6,6 +6,9 @@
 }
 .containerForm h3{
     font-size: 40px;
+
+    color: rgb(21, 82, 100);
+
 }
 .containerForm form{
     display: grid;
@@ -42,6 +45,7 @@
     padding-top: 15px;
     text-align: left;
     padding-left: 10%;
+    margin-bottom: -20px;
 }
 .errorSelect {
     font-size: 12px;

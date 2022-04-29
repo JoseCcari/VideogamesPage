@@ -8,10 +8,9 @@ import {
 	filterByGenre,
 } from '../redux/actions';
 import { Link } from 'react-router-dom';
-//import  Button from '../modules/Button'
-import Card from '../modules/Card';
-import Paginated from '../modules/Paginated';
-import SearchBar from '../modules/SearchBar.js';
+import Card from '../components/Card';
+import Paginated from '../components/Paginated';
+import SearchBar from '../components/SearchBar.js';
 import './Videogames.css';
 
 function Videogames() {
@@ -71,8 +70,12 @@ function Videogames() {
 				<div className='filters'>
 					<h3>Sorted: </h3>
 					<div className='select'>
-						<select id='format' onChange={(e) => handleSortByName(e)}>
-							<option selected disabled>
+						<select
+							defaultValue={'DEFAULT'}
+							id='format'
+							onChange={(e) => handleSortByName(e)}
+						>
+							<option value={'DEFAULT'} disabled>
 								alphabetic
 							</option>
 							<option value='asc'>Ascendente</option>
@@ -80,8 +83,12 @@ function Videogames() {
 						</select>
 					</div>
 					<div className='select'>
-						<select id='format' onChange={(e) => handleSortByRating(e)}>
-							<option selected disabled>
+						<select
+							defaultValue={'DEFAULT'}
+							id='format'
+							onChange={(e) => handleSortByRating(e)}
+						>
+							<option value={'DEFAULT'} disabled>
 								Rating
 							</option>
 							<option value='major'>Major</option>
@@ -94,18 +101,29 @@ function Videogames() {
 					<h3>Filters: </h3>
 
 					<div className='select'>
-						<select id='format' onChange={(e) => handleClickCreated(e)}>
-							<option selected disabled>
+						<select
+							defaultValue={'DEFAULT'}
+							id='format'
+							onChange={(e) => handleClickCreated(e)}
+						>
+							<option value={'DEFAULT'} disabled>
 								Origen
 							</option>
+							<option value='All'>All</option>
 							<option value='Created'>Creados</option>
 							<option value='Api'>Api</option>
 						</select>
 					</div>
 					<div className='select'>
-						<select id='format2' onChange={(e) => handleFilterByGenre(e)}>
-							<option hidden>Genres</option>
-							<option value='Todos'>Genres</option>
+						<select
+							defaultValue={'DEFAULT'}
+							id='format2'
+							onChange={(e) => handleFilterByGenre(e)}
+						>
+							<option value={'DEFAULT'} disabled>
+								Genres
+							</option>
+							<option value='All'>All</option>
 							<option value='Action'>Action</option>
 							<option value='Shooter'>Shooter</option>
 							<option value='Platformer'>Platformer</option>
@@ -132,7 +150,7 @@ function Videogames() {
 				</div>
 
 				<div className='wrap'>
-					<SearchBar />
+					<SearchBar setPage={setCurrentPage} />
 				</div>
 				<Link to='/CreateVideogame' style={{ textDecoration: 'none' }}>
 					<div className='create'>Create</div>
@@ -144,6 +162,7 @@ function Videogames() {
 					videogamesPerPage={videogamesPerPage}
 					allVideogames={allVideogames.length}
 					paginated={paginated}
+					currentPage={currentPage}
 				/>
 			</div>
 

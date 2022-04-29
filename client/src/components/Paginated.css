@@ -41,14 +41,35 @@
     font-size: 100%;
     padding: .5em;
   }
-  .data-pagination a:focus,
-  .data-pagination a:hover {
-    color: #f60;
+  .pageNormal{
+    background:none ;
+    font-size: 100%;
+    margin-left: 0.8em;
+    border: none;
+    outline: none;
+    color: rgb(202, 180, 180);
+    line-height: 20px;
+    font-size: 200;
     cursor: pointer;
   }
-  .data-pagination li.current {
+
+  .pageActive{
+    background:none ;
+    font-size: 100%;
+    margin-left: 0.8em;
+    border: none;
+    outline: none;
+    line-height: 20px;
+    font-size: 200;
+    color: #f60;
+    cursor: pointer;
     background: rgba(0,0,0,.1);
   }
+  .data-pagination li.current:focus{
+    background: rgba(0,0,0,.1);
+  }
+  
+
   /* Disabled & Hidden Styles */
   .data-pagination .disabled,
   .data-pagination .hidden,

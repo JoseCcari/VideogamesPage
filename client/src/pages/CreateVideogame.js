@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGenres, createNewVideogame } from '../redux/actions';
-import Input from '../modules/Input';
-import SelectForm from '../modules/SelectForm';
+import Input from '../components/Input';
+import SelectForm from '../components/SelectForm';
 import './CreateVideogame.css';
 import {
 	Formu,
@@ -11,7 +11,7 @@ import {
 	Button,
 	MessageSuccess,
 	MessageError,
-} from '../modules/CreateGame';
+} from '../components/CreateGame';
 function CreateVideogame() {
 	const dispatch = useDispatch();
 	const genres = useSelector((state) => state.genres);
@@ -46,25 +46,58 @@ function CreateVideogame() {
 		date: /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/,
 	};
 
-  const Plataformas = [
-    'PC',               'PlayStation 5',     'PlayStation 4',
-    'Xbox One',         'Xbox Series S/X',   'Nintendo Switch',
-    'iOS',              'Android',           'Nintendo 3DS',
-    'Nintendo DS',      'Nintendo DSi',      'macOS',
-    'Linux',            'Xbox 360',          'Xbox',
-    'PlayStation 3',    'PlayStation 2',     'PlayStation',
-    'PS Vita',          'PSP',               'Wii U',
-    'Wii',              'GameCube',          'Nintendo 64',
-    'Game Boy Advance', 'Game Boy Color',    'Game Boy',
-    'SNES',             'NES',               'Classic Macintosh',
-    'Apple II',         'Commodore / Amiga', 'Atari 7800',
-    'Atari 5200',       'Atari 2600',        'Atari Flashback',
-    'Atari 8-bit',      'Atari ST',          'Atari Lynx',
-    'Atari XEGS',       'Genesis',           'SEGA Saturn',
-    'SEGA CD',          'SEGA 32X',          'SEGA Master System',
-    'Dreamcast',        '3DO',               'Jaguar',
-    'Game Gear',        'Neo Geo'
-  ]
+	const Plataformas = [
+		'PC',
+		'PlayStation 5',
+		'PlayStation 4',
+		'Xbox One',
+		'Xbox Series S/X',
+		'Nintendo Switch',
+		'iOS',
+		'Android',
+		'Nintendo 3DS',
+		'Nintendo DS',
+		'Nintendo DSi',
+		'macOS',
+		'Linux',
+		'Xbox 360',
+		'Xbox',
+		'PlayStation 3',
+		'PlayStation 2',
+		'PlayStation',
+		'PS Vita',
+		'PSP',
+		'Wii U',
+		'Wii',
+		'GameCube',
+		'Nintendo 64',
+		'Game Boy Advance',
+		'Game Boy Color',
+		'Game Boy',
+		'SNES',
+		'NES',
+		'Classic Macintosh',
+		'Apple II',
+		'Commodore / Amiga',
+		'Atari 7800',
+		'Atari 5200',
+		'Atari 2600',
+		'Atari Flashback',
+		'Atari 8-bit',
+		'Atari ST',
+		'Atari Lynx',
+		'Atari XEGS',
+		'Genesis',
+		'SEGA Saturn',
+		'SEGA CD',
+		'SEGA 32X',
+		'SEGA Master System',
+		'Dreamcast',
+		'3DO',
+		'Jaguar',
+		'Game Gear',
+		'Neo Geo',
+	];
 
 	const Plataforms = Plataformas.map((p) => ({ name: p }));
 
@@ -112,7 +145,7 @@ function CreateVideogame() {
 			</div>
 
 			<main className='containerForm'>
-				<h3>Create your Videogame</h3>
+				<h3 className='titleCreated'>CREATE YOUR VIDEOGAME</h3>
 				<Formu action=''>
 					<Input
 						placeholder={'Name videogame'}

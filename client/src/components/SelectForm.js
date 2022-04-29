@@ -1,22 +1,24 @@
 import React from 'react';
-import { Label } from '../modules/CreateGame';
+import { Label } from '../components/CreateGame';
 function SelectForm({ title, state, setState, data }) {
 	function handleSelect(e) {
 		if (!state.value.includes(e.target.value)) {
+			const value = [...state.value, e.target.value];
 			setState({
 				...state,
-				value: [...state.value, e.target.value],
-				validate: state.value,
+				value: value,
+				validate: value.length > 0 ? 'true' : 'false',
 			});
 		}
 	}
 
 	function handleDelete(game) {
 		if (state.value.includes(game)) {
+			const NewValue = state.value.filter((element) => element !== game);
 			setState({
 				...state,
-				value: state.value.filter((element) => element !== game),
-				validate: state.value,
+				value: NewValue,
+				validate: NewValue.length > 0 ? 'true' : 'false',
 			});
 		}
 	}
@@ -24,8 +26,8 @@ function SelectForm({ title, state, setState, data }) {
 	return (
 		<div>
 			<Label>{`${title}:`} </Label>
-			<select onChange={(e) => handleSelect(e)}>
-				<option selected disabled>
+			<select defaultValue={'DEFAULT'} onChange={(e) => handleSelect(e)}>
+				<option value={'DEFAULT'} disabled>
 					Select a {title}
 				</option>
 				{data.map((g, index) => (

@@ -11,11 +11,16 @@ export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
 
 export const getVideogames = () => {
 	return async (dispatch) => {
-		const allData = await axios.get('http://localhost:3001/videogames');
-		return dispatch({
-			type: GET_VIDEOGAMES,
-			payload: allData.data,
-		});
+		try {
+			const allData = await axios.get('http://localhost:3001/videogames');
+			return dispatch({
+				type: GET_VIDEOGAMES,
+				payload: allData.data,
+			});
+		} catch (error) {
+			console.log(error);
+			alert('No results were found');
+		}
 	};
 };
 
@@ -38,6 +43,7 @@ export const getNameVideogames = (name) => {
 			});
 		} catch (error) {
 			console.log(error);
+			alert('No results were found');
 		}
 	};
 };
