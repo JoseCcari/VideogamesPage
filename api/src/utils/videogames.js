@@ -7,17 +7,17 @@ const getApiVideogames = async () => {
   let totalVideogames = [];
 
   for (let page = 1; page < 6; page++) {
-    const gamesFromPage = await axios.get(
-      `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`
-    );
-    let { results } = gamesFromPage.data;
-    totalVideogames = totalVideogames.concat(results);
-    /* const LinksFromPage = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`;
-        linksPerPage.push(LinksFromPage) */
+    let pags = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`;
+    totalVideogames.push(pags);
   }
-  //const TotalVideogames = await Promise.all(linksPerPage.map(link => axios.get(link).data))
-  //console.log(TotalVideogames)
-  return totalVideogames;
+
+  const resultVidegames = await Promise.all(
+    totalVideogames.map((videogames) =>
+      axios(videogames).then((r) => r.data.results)
+    )
+  );
+
+  return resultVidegames.flat();
 };
 
 const getBbVideogames = async () => {
@@ -84,7 +84,6 @@ const getAllVideogames = async () => {
     const { id, name, background_image, genres, rating } = game;
     const genresArray = [];
     for (const genre of genres) {
-      //de los generos que me traigo de la descripcion de la api, extraigo los valores para armar un array aparte para mí.
       const { name, id } = genre;
       genresArray.push({
         id,

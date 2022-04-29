@@ -12,7 +12,7 @@ export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
 export const getVideogames = () => {
 	return async (dispatch) => {
 		try {
-			const allData = await axios.get('http://localhost:3001/videogames');
+			const allData = await axios.get('/videogames');
 			return dispatch({
 				type: GET_VIDEOGAMES,
 				payload: allData.data,
@@ -34,9 +34,7 @@ export const filterByCreated = (payload) => {
 export const getNameVideogames = (name) => {
 	return async (dispatch) => {
 		try {
-			const allNames = await axios.get(
-				`http://localhost:3001/videogames?name=${name}`
-			);
+			const allNames = await axios.get(`/videogames?name=${name}`);
 			return dispatch({
 				type: NAME_BY_QUERY,
 				payload: allNames.data,
@@ -51,7 +49,7 @@ export const getNameVideogames = (name) => {
 export const getGenres = () => {
 	return async (dispatch) => {
 		try {
-			const allGenres = await axios.get('http://localhost:3001/genres');
+			const allGenres = await axios.get('/genres');
 			return dispatch({
 				type: GET_GENRES,
 				payload: allGenres.data,
@@ -65,10 +63,7 @@ export const getGenres = () => {
 export const createNewVideogame = (payload) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.post(
-				'http://localhost:3001/videogame',
-				payload
-			);
+			const response = await axios.post('/videogame', payload);
 			return response;
 		} catch (error) {
 			console.log(error);
@@ -79,7 +74,7 @@ export const createNewVideogame = (payload) => {
 export const getDetailVideogame = (id) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`http://localhost:3001/videogame/${id}`);
+			const response = await axios.get(`/videogame/${id}`);
 			return dispatch({
 				type: GET_DETAIL_VIDEOGAME,
 				payload: response.data,
